@@ -1,0 +1,15 @@
+Package: hotROCs
+Type: Package
+Title: Interactive Heatmaps for areas under ROC curves
+Version: 0.99.1
+Date: 2016-07-01
+Author: Charles C. Berry
+Maintainer: Charles C. Berry <cberry@ucsd.edu>
+Imports:
+    RSVGTipsDevice,
+    colorspace
+Description: The areas under ROC curves are displayed as a
+    heatmap. Various significance tests can be displayed.
+License: GPL-3
+LazyLoad: yes
+RoxygenNote: 5.0.1
