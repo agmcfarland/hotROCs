@@ -8,7 +8,7 @@ ROC.ORC(response, variables, origin = NULL, origin.levels = NULL)
 }
 \arguments{
 \item{response}{logical vector identifying cases or character
-vector or factor vector with \dQuote{insertion} marking the
+vector or factor vector with \code{"insertion"} marking the
 cases.}
 
 \item{variables}{a \code{matrix} or \code{data.frame} with

@@ -10,7 +10,8 @@
 ##' @title ROC.MRC - ROC areas for matched control data
 ##' @param response logical vector identifying cases or character
 ##'     vector or factor vector with \dQuote{insertion} marking the
-##'     cases.
+##'     cases. Alternatively, a factor or character vector with
+##'     elements matching \code{"insertion"} denoting the cases.
 ##' @param stratum a vector of \code{length(response)} elements whose
 ##'     unique values correspond to cases and their matched
 ##'     controls. There must be exactly one case and \code{k} controls
@@ -41,7 +42,7 @@ ROC.MRC <-
              ragged.OK=TRUE)
 {
 
-    if (is.character(response)) response <- response == "insertion"
+    if (!is.logical(response)) response <- response == "insertion"
     if (is.null(origin)) origin <- rep(1,length(response))
     if (is.null(origin.levels))
         origin.levels <- as.character(unique(origin))

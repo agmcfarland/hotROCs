@@ -10,7 +10,8 @@ ROC.MRC(response, stratum, variables, origin = NULL, origin.levels = NULL,
 \arguments{
 \item{response}{logical vector identifying cases or character
 vector or factor vector with \dQuote{insertion} marking the
-cases.}
+cases. Alternatively, a factor or character vector with
+elements matching \code{"insertion"} denoting the cases.}
 
 \item{stratum}{a vector of \code{length(response)} elements whose
 unique values correspond to cases and their matched

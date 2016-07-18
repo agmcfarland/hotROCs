@@ -11,7 +11,7 @@
 ##' A matrix of ROC curve areas and variances.
 ##' @title ROC.ORC - ROC area matrix
 ##' @param response logical vector identifying cases or character
-##'     vector or factor vector with \dQuote{insertion} marking the
+##'     vector or factor vector with \code{"insertion"} marking the
 ##'     cases.
 ##' @param variables a \code{matrix} or \code{data.frame} with
 ##'     \code{length(response)} rows and two or more columns.
@@ -34,7 +34,7 @@
 ROC.ORC <-
     function(response,variables,origin=NULL,origin.levels=NULL)
 {
-    if (is.character(response)) response <- response == "insertion"
+    if (!is.logical(response)) response <- response == "insertion"
     if (is.null(origin))
         origin <- rep(1,length(response))
     if (is.null(origin.levels))
