@@ -6,7 +6,8 @@
 ##' controls, the ROC area is estimated as the average fraction of
 ##' controls whose variable value is less than that of its reference
 ##' case. Variances are computed from the usual sample variance
-##' divided by the number of cases.
+##' divided by the number of cases.  It is the responsiibility of the
+##' caller to remove \code{NA} values from the arguments.
 ##' @title ROC.MRC - ROC areas for matched control data
 ##' @param response logical vector identifying cases or character
 ##'     vector or factor vector with \dQuote{insertion} marking the
@@ -41,8 +42,15 @@ ROC.MRC <-
     function(response,stratum,variables,origin=NULL,origin.levels=NULL,
              ragged.OK=TRUE)
 {
-
-    if (!is.logical(response)) response <- response == "insertion"
+    if (any(is.na(variables))){
+        res <- colSums(is.na(variables))>0
+        stop("NA values not allowed. \nFound in:",
+             paste(names(res)[res],collapse="\n\t"))
+        }
+    stopifnot(all(!is.na(response)))
+    stopifnot(all(!is.na(origin)))
+    stopifnot(all(!is.na(stratum)))
+   if (!is.logical(response)) response <- response == "insertion"
     if (is.null(origin)) origin <- rep(1,length(response))
     if (is.null(origin.levels))
         origin.levels <- as.character(unique(origin))

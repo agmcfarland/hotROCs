@@ -6,7 +6,8 @@
 ##' multiple datasets. Comparisons of different variables in a dataset
 ##' compare the ROC curve areas relative to the controls.  Comparisons
 ##' of different datasets uses only the responses from each dataset
-##' and do not involve the random controls.
+##' and do not involve the random controls.  It is the responsiibility
+##' of the caller to remove \code{NA} values from the arguments.
 ##'
 ##' A matrix of ROC curve areas and variances.
 ##' @title ROC.ORC - ROC area matrix
@@ -34,6 +35,13 @@
 ROC.ORC <-
     function(response,variables,origin=NULL,origin.levels=NULL)
 {
+    if (any(is.na(variables))){
+        res <- colSums(is.na(variables))>0
+        stop("NA values not allowed. \nFound in:",
+             paste(names(res)[res],collapse="\n\t"))
+    }
+    stopifnot(all(!is.na(response)))
+    stopifnot(all(!is.na(origin)))    
     if (!is.logical(response)) response <- response == "insertion"
     if (is.null(origin))
         origin <- rep(1,length(response))

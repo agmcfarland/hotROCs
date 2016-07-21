@@ -1,8 +1,8 @@
 Package: hotROCs
 Type: Package
 Title: Interactive Heatmaps for Areas under ROC Curves
-Version: 0.99.3
-Date: 2016-07-18
+Version: 0.99.4
+Date: 2016-07-20
 Author: Charles C. Berry
 Maintainer: Charles C. Berry <cberry@ucsd.edu>
 Imports:
