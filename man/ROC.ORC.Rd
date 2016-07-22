@@ -33,7 +33,8 @@ estimated by the method of Delong et al.  The data may derive from
 multiple datasets. Comparisons of different variables in a dataset
 compare the ROC curve areas relative to the controls.  Comparisons
 of different datasets uses only the responses from each dataset
-and do not involve the random controls.
+and do not involve the random controls.  It is the responsiibility
+of the caller to remove \code{NA} values from the arguments.
 }
 \details{
 A matrix of ROC curve areas and variances.

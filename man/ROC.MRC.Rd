@@ -45,7 +45,8 @@ are used to allow for biased selection and every case has \code{k}
 controls, the ROC area is estimated as the average fraction of
 controls whose variable value is less than that of its reference
 case. Variances are computed from the usual sample variance
-divided by the number of cases.
+divided by the number of cases.  It is the responsiibility of the
+caller to remove \code{NA} values from the arguments.
 }
 \examples{
 case <- rep(rep(c(TRUE,FALSE),c(1,3)),1000)
