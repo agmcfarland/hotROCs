@@ -67,7 +67,7 @@ ROC.MRC <-
         ok.rows <- origin==x
         stratum <- stratum[ok.rows]
         response <- response[ok.rows]
-        variables <- variables[ok.rows,]
+        variables <- as.matrix(variables[ok.rows,])
         rstrata <- stratum[response]
         mstrata <- stratum[!response]
         stopifnot(all(!duplicated(rstrata)))
