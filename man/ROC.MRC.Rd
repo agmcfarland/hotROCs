@@ -4,8 +4,14 @@
 \alias{ROC.MRC}
 \title{ROC.MRC - ROC areas for matched control data}
 \usage{
-ROC.MRC(response, stratum, variables, origin = NULL, origin.levels = NULL,
-  ragged.OK = TRUE)
+ROC.MRC(
+  response,
+  stratum,
+  variables,
+  origin = NULL,
+  origin.levels = NULL,
+  ragged.OK = TRUE
+)
 }
 \arguments{
 \item{response}{logical vector identifying cases or character
@@ -60,4 +66,3 @@ ROC.MRC(case,group,cbind(var1,var2,var3),origin)
 \author{
 Charles Berry
 }
-

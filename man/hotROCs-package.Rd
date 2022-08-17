@@ -22,12 +22,9 @@ sonicating or other wise fragmenting the DNA that contains sites. The
 former would typically be used for integration sites isolated by using
 restriction enzymes.
 
-Once such a matrix has been created \code{\link{ROCSVG}} will render a
-heatmap with clickable links that can be used to display the results of
-various significance tests. 
 }
 
-\author{ \packageAuthor{hotROCs} 
+\author{ \packageAuthor{hotROCs}
 
 Maintainer: \packageMaintainer{hotROCs}
 }

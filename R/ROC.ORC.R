@@ -41,7 +41,7 @@ ROC.ORC <-
              paste(names(res)[res],collapse="\n\t"))
     }
     stopifnot(all(!is.na(response)))
-    stopifnot(all(!is.na(origin)))    
+    stopifnot(all(!is.na(origin)))
     if (!is.logical(response)) response <- response == "insertion"
     if (is.null(origin))
         origin <- rep(1,length(response))
@@ -57,40 +57,40 @@ ROC.ORC <-
                    ROC.DDCP(resp,indep)
 	       })
     ## res2 provides variances for origin to origin comparisons
-    pairs <- combn(origin.levels,2)
+    pairs <- utils::combn(origin.levels,2)
     res2 <-
         apply(pairs,2,
 	      function(x) {
                   ok.rows <- response & (origin %in% x)
                   ROC.DDCP(origin[ok.rows]==x[1],
                            variables[ok.rows,])})
-    rocz <- 
+    rocz <-
         do.call(cbind, lapply(res,"[[","theta"))
     colnames(rocz) <- origin.levels
     rownames(rocz) <- colnames(variables)
 
     nullVars <- sapply(res,function(x) diag(x$var))
     nullStats <- (rocz-0.50)^2/nullVars
-    nullPvals <- pchisq(nullStats,df=1L,lower.tail=FALSE)
+    nullPvals <- stats::pchisq(nullStats,df=1L,lower.tail=FALSE)
     ncv <- nrow(rocz)
     variableDVars <-
         sapply(res,
-	       function(resElt) combn(ncv,2,
+	       function(resElt) utils::combn(ncv,2,
 				      function(x) sum(resElt$var[x,x]*c(1,-1,-1,1))))
     variableDiffs <-
         do.call(rbind,
-                combn(ncv,2,
+                utils::combn(ncv,2,
 		      function(x) rocz[x[1],]-rocz[x[2],],simplify=FALSE))
     variableDStats <- variableDiffs^2/variableDVars
-    variablePvals <- pchisq(variableDStats,df=1,lower.tail=FALSE)
-    attr(variablePvals,"whichRow") <- combn(ncv,2)
+    variablePvals <- stats::pchisq(variableDStats,df=1,lower.tail=FALSE)
+    attr(variablePvals,"whichRow") <- utils::combn(ncv,2)
 
     originDiffs <- sapply(res2,"[[","theta")-0.50
     originVars <- lapply(res2,function(x) diag(x$var))
     originStats <- originDiffs^2 / do.call(cbind,originVars)
-    originPvals <- pchisq(originStats,df=1,lower.tail=FALSE)
+    originPvals <- stats::pchisq(originStats,df=1,lower.tail=FALSE)
     rownames(originPvals) <- rownames(rocz)
-    attr(originPvals,"whichCol") <- combn(length(origin.levels),2)
+    attr(originPvals,"whichCol") <- utils::combn(length(origin.levels),2)
     list(ROC=rocz,
          var=
              list(within.origin=lapply(res,"[[","var"),

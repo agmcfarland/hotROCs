@@ -37,8 +37,8 @@ ROC.DDCP<-
     V.01 <- sapply( 1:ncol(indep),
                    function(z) 2*(xy.ranks[[z]][[1]]-y.ranks[, z])/ m )/2
     theta.hat <- colMeans(V.10)
-    S.10 <- var(V.10) 
-    S.01 <- var(V.01)
+    S.10 <- stats::var(V.10)
+    S.01 <- stats::var(V.01)
     ## ensure S is posdef
     S <- S.10/nrow(x) + S.01/nrow(y) + 1e-10*diag(ncol(S.10))
     list(theta = theta.hat, var = S)

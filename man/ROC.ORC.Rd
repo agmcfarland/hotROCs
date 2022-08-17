@@ -50,4 +50,3 @@ ROC.ORC(case,cbind(var1,var2,var3),origin)
 \author{
 Charles Berry
 }
-

@@ -25,13 +25,12 @@ ROC curve areas and variances estimated as per Delong et al, 1988.
 This is a utility function that users will probably not want to
 invoke directly.
 }
-\author{
-Charles Berry
-}
 \seealso{
 DeLong, Elizabeth R., David M. DeLong, and Daniel
     L. Clarke-Pearson. \dQuote{Comparing the areas under two or
     more correlated receiver operating characteristic curves: a
     nonparametric approach.}  Biometrics (1988): 837-845.
 }
-
+\author{
+Charles Berry
+}

@@ -91,9 +91,9 @@ ROC.MRC <-
         } else {
             mindex <- which(!response)[order(mstrata)]
         }
-        
+
         if (any(cmtab[,2]!=1)) stop("MRCs with no matching Integration Site.")
-        phi <- 
+        phi <-
             sweep(
                 array(variables[mindex,],
                       dim=c(nMRCs, nsites, nvars),
@@ -106,26 +106,26 @@ ROC.MRC <-
     phi.list <-
         sapply(origin.levels,phi.fun,simplify=FALSE)
     rocz <- sapply(phi.list,colMeans)
-    ## inflate the variance by 1e-10 to avoid diff/0.0 in Stats 
-    roczVar <- lapply(phi.list,function(x) 1e-10*diag(ncol(x)) + var(x)/nrow(x))
+    ## inflate the variance by 1e-10 to avoid diff/0.0 in Stats
+    roczVar <- lapply(phi.list,function(x) 1e-10*diag(ncol(x)) + stats::var(x)/nrow(x))
     nullStats <- (rocz-0.5)^2/sapply(roczVar,diag)
-    nullPvals <- pchisq(nullStats,df=1,lower.tail=FALSE)
+    nullPvals <- stats::pchisq(nullStats,df=1,lower.tail=FALSE)
     variableDiffs <-
-        do.call(rbind,combn(nvars,2,function(x) rocz[x[1],]-rocz[x[2],],
+        do.call(rbind,utils::combn(nvars,2,function(x) rocz[x[1],]-rocz[x[2],],
                 simplify=FALSE))
     variableDVars <-
         sapply(roczVar,
-	       function(x) combn(nvars,2,
+	       function(x) utils::combn(nvars,2,
                                  function(y) sum(x[y,y]*c(1,-1,-1,1))))
     variableDStats <- variableDiffs^2/variableDVars
-    variablePvals <- pchisq(variableDStats,df=1,lower.tail=FALSE)
-    attr(variablePvals,"whichRow") <- combn(nvars,2)
+    variablePvals <- stats::pchisq(variableDStats,df=1,lower.tail=FALSE)
+    attr(variablePvals,"whichRow") <- utils::combn(nvars,2)
     if (length(origin.levels)>1){
-        originDVars <- combn(roczVar,2,function(x) diag(x[[1]])+diag(x[[2]]))
-        originDiffs <- combn(origin.levels,2,function(x) rocz[,x[1]]-rocz[,x[2]])
+        originDVars <- utils::combn(roczVar,2,function(x) diag(x[[1]])+diag(x[[2]]))
+        originDiffs <- utils::combn(origin.levels,2,function(x) rocz[,x[1]]-rocz[,x[2]])
         originStats <- originDiffs^2/originDVars
-        originPvals <- pchisq(originStats,df=1,lower.tail=FALSE)
-        attr(originPvals,"whichCol") <- combn(length(origin.levels),2)
+        originPvals <- stats::pchisq(originStats,df=1,lower.tail=FALSE)
+        attr(originPvals,"whichCol") <- utils::combn(length(origin.levels),2)
         rownames(originPvals) <- rownames(rocz)
     } else {
         originPvals <- matrix(NA,nrow=nvars,ncol=1L)
