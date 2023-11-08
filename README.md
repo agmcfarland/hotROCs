@@ -5,3 +5,5 @@
 
 # hotROCs
 ROC curve area matrix and heat map 
+
+hotROCs with the `colorspace` dependency removed for compatability with more recent version for R.
